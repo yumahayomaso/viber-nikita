@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim 
+FROM microsoft/dotnet:2.1-sdk
 WORKDIR /app
 COPY . .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet ViberApi.dll
