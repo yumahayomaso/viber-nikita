@@ -44,6 +44,16 @@ namespace ViberApi.Controllers
             return Ok(await response.Content.ReadAsStringAsync());
         }
 
+        [HttpPost("getuser")]
+        public async Task<IActionResult> GetUser([FromBody] GetUserRequest request)
+        {
+            var response = await _httpClient.PostAsync("https://chatapi.viber.com/pa/get_user_details",
+                new StringContent(JsonConvert.SerializeObject(request)));
+
+            return Ok(await response.Content.ReadAsStringAsync());
+        }
+
+
         [HttpPost("hook")]
         public async Task<IActionResult> Hook()
         {
@@ -51,6 +61,10 @@ namespace ViberApi.Controllers
         }
     }
 
+    public class GetUserRequest
+    {
+        public string Id { get; set; }
+    }
     public class SendMessageRequest
     {
         [JsonProperty("receiver")]
@@ -80,4 +94,56 @@ namespace ViberApi.Controllers
         [JsonProperty("avatar")]
         public Uri Avatar { get; set; }
     }
+
+    public partial class UserInfo
+    {
+        [JsonProperty("status")]
+        public long Status { get; set; }
+
+        [JsonProperty("status_message")]
+        public string StatusMessage { get; set; }
+
+        [JsonProperty("message_token")]
+        public double MessageToken { get; set; }
+
+        [JsonProperty("user")]
+        public User User { get; set; }
+    }
+
+    public partial class User
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("avatar")]
+        public Uri Avatar { get; set; }
+
+        [JsonProperty("country")]
+        public string Country { get; set; }
+
+        [JsonProperty("language")]
+        public string Language { get; set; }
+
+        [JsonProperty("primary_device_os")]
+        public string PrimaryDeviceOs { get; set; }
+
+        [JsonProperty("api_version")]
+        public long ApiVersion { get; set; }
+
+        [JsonProperty("viber_version")]
+        public string ViberVersion { get; set; }
+
+        [JsonProperty("mcc")]
+        public long Mcc { get; set; }
+
+        [JsonProperty("mnc")]
+        public long Mnc { get; set; }
+
+        [JsonProperty("device_type")]
+        public string DeviceType { get; set; }
+    }
+}
 }
