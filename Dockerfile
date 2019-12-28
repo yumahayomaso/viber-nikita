@@ -9,10 +9,10 @@ COPY ["ViberApi/ViberApi.csproj", "ViberApi/"]
 RUN dotnet restore "ViberApi/ViberApi.csproj"
 COPY . .
 WORKDIR "/src/ViberApi"
-RUN dotnet build "ViberApi.csproj" -c Release -o /app/build
+RUN dotnet build "ViberApi/ViberApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ViberApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "ViberApi/ViberApi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
