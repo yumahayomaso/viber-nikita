@@ -146,4 +146,3 @@ namespace ViberApi.Controllers
         public string DeviceType { get; set; }
     }
 }
-}
