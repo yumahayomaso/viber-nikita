@@ -43,6 +43,12 @@ namespace ViberApi.Controllers
 
             return Ok(await response.Content.ReadAsStringAsync());
         }
+
+        [HttpPost("hook")]
+        public async Task<IActionResult> Hook()
+        {
+            return Ok();
+        }
     }
 
     public class SendMessageRequest
